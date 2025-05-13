@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Interactive Indigenous Map</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    #map { height: 100vh; }
+    body { margin: 0; font-family: Arial, sans-serif; }
+  </style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script>
+  const map = L.map('map').setView([10, 120], 3); // Centered over Southeast Asia
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap contributors'
+  }).addTo(map);
+
+  const indigenousGroups = [
+    {
+      name: "Aeta",
+      country: "Philippines",
+      location: [15.325, 120.567],
+      challenges: "Loss of ancestral land, discrimination, poverty"
+    },
+    {
+      name: "Igorot",
+      country: "Philippines",
+      location: [16.615, 120.317],
+      challenges: "Cultural assimilation, land rights issues"
+    },
+    {
+      name: "Maasai",
+      country: "Kenya",
+      location: [-1.406, 36.744],
+      challenges: "Climate change, tourism-related displacement"
+    },
+    {
+      name: "Mapuche",
+      country: "Chile",
+      location: [-38.739, -72.590],
+      challenges: "Land disputes, political repression"
+    }
+  ];
+
+  indigenousGroups.forEach(group => {
+    L.marker(group.location).addTo(map)
+      .bindPopup(`<strong>${group.name} (${group.country})</strong><br/>Challenges: ${group.challenges}`);
+  });
+</script>
+
+</body>
+</html>
